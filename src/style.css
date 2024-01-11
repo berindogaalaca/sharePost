@@ -1,0 +1,13 @@
+.form_control{
+    width: 38%;
+}
+@media screen and (max-width:1000px){
+    .form_control{
+        width: 55%;
+    }
+}
+@media screen and (max-width:700px){
+    .form_control{
+        width: 75%;
+    }
+}
