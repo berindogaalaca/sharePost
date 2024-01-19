@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import "./post.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PostHeader from "./PostHeader";
+import PostDescription from "./PostDescription";
+
 
 function PostCard() {
-  const [tekGonderi, setTekGonderi] = useState(false);
+   const [tekGonderi, setTekGonderi] = useState(false);
   const [birdenFazlaGonderi, setBirdenFazlaGonderi] = useState(false);
   const [selectedCheckbox, setSelectedCheckbox] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImageCount, setSelectedImageCount] = useState(0);
 
   const handleTekGonderiChange = () => {
     setTekGonderi(!tekGonderi);
@@ -21,15 +24,18 @@ function PostCard() {
     if (tekGonderi) {
       setTekGonderi(false);
     }
+    setSelectedImageCount(0); // Her checkbox seçiminde sayıyı sıfırla
   };
 
   const handleCheckboxChange = (checkboxId) => {
     setSelectedCheckbox(checkboxId);
+    setSelectedImageCount(0); // Her checkbox seçiminde sayıyı sıfırla
   };
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
-    if (file) {
+    if (file && selectedImageCount < 10) {
+      setSelectedImageCount(selectedImageCount + 1); // Görsel eklendikçe sayıyı artır
       const reader = new FileReader();
       reader.onloadend = () => {
         setSelectedImage(reader.result);
@@ -37,6 +43,7 @@ function PostCard() {
       reader.readAsDataURL(file);
     }
   };
+
 
   const renderCardBody = () => {
     let cardBodyContent;
@@ -57,6 +64,7 @@ function PostCard() {
       );
       cardBodyStyle = {};
     }
+    
 
     return (
       <div className="card-body position-relative" style={cardBodyStyle}>
@@ -66,7 +74,12 @@ function PostCard() {
             src={selectedImage}
             alt="Seçilen Görsel"
             className="img-fluid"
-            style={{ objectFit: "cover", width: "100%", height: "100%" }}
+            style={{
+              objectFit: "cover",
+              width: "100%",
+              height: "100%",
+              objectPosition: "center",
+            }}
           />
         )}
         {selectedCheckbox && (
@@ -81,7 +94,11 @@ function PostCard() {
             />
             <button
               className="btn btn-primary"
-              style={{ background: "white", color: "#343a40", borderColor:"white" }}
+              style={{
+                background: "white",
+                color: "#343a40",
+                borderColor: "white",
+              }}
             >
               Görsel Seç
             </button>
@@ -98,9 +115,9 @@ function PostCard() {
           Gönderi Sayısını Seçiniz
         </h2>
       </header>
-      <div className="container mt-4">
+      <div className="container mt-4 mb-5">
         <div className="row">
-          <div className="col-md-6" style={{ height: "675px", width: "540px" }}>
+          <div className="col-md-6 mb-5" style={{ width: "540px" }}>
             <div className="mb-3">
               <label className="form-check-label">
                 <input
@@ -113,8 +130,9 @@ function PostCard() {
               </label>
             </div>
             <div className={`card ${birdenFazlaGonderi ? "blur" : ""}`}>
-              <PostHeader/>
+              <PostHeader />
               <div className="card-body">
+                <PostDescription/>
                 {renderCardBody()}
                 <div className="form-check form-check-inline mt-3">
                   <input
@@ -168,12 +186,46 @@ function PostCard() {
               </label>
             </div>
             <div className={`card ${tekGonderi ? "blur" : ""}`}>
+            <PostHeader />
               <div className="card-body">
-                <h5 className="card-title">Card 2 Başlığı</h5>
-                <p className="card-text">Bu ikinci bir kart örneğidir.</p>
-                <a href="#" className="btn btn-primary">
-                  Detaylar
-                </a>
+                <PostDescription/>
+                {renderCardBody()}
+                <div className="form-check form-check-inline mt-3">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="checkbox4"
+                    checked={selectedCheckbox === "checkbox4"}
+                    onChange={() => handleCheckboxChange("checkbox4")}
+                  />
+                  <label className="form-check-label" htmlFor="checkbox4">
+                    Kare
+                  </label>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="checkbox5"
+                    checked={selectedCheckbox === "checkbox5"}
+                    onChange={() => handleCheckboxChange("checkbox5")}
+                  />
+                  <label className="form-check-label" htmlFor="checkbox5">
+                    Yatay
+                  </label>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="checkbox6"
+                    checked={selectedCheckbox === "checkbox6"}
+                    onChange={() => handleCheckboxChange("checkbox6")}
+                  />
+                  <label className="form-check-label" htmlFor="checkbox6">
+                    Dikey
+                  </label>
+                </div>
               </div>
             </div>
           </div>
