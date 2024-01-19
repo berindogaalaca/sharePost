@@ -1,0 +1,15 @@
+/* CSS dosyanıza ekleyin veya ilgili stil bölümüne ekleyin */
+.image-container {
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ddd; /* Çerçeve rengi */
+    border-radius: 5px; /* Çerçeve yuvarlatma */
+    overflow: hidden; /* Taşan içeriği kesme */
+  }
+  
+  .image-container img {
+    width: 100%; /* Görselin container içinde geniş olması */
+    height: 100%; /* Container içinde yüksek olması */
+    object-fit: contain; /* Orantılı bir şekilde içeriğin sığması */
+  }
+  

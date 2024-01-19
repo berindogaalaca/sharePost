@@ -16,12 +16,11 @@ function Login() {
   };
 
   const handleEmailChange = (e) => {
-    console.log('Email changed:', e.target.value);
+    console.log("Email changed:", e.target.value);
   };
   const handlePasswordChange = (e) => {
-    console.log('Password changed:', e.target.value);
+    console.log("Password changed:", e.target.value);
   };
-
 
   return (
     <div
@@ -52,12 +51,13 @@ function Login() {
             inputClassName="custom-control custom-checkbox "
             labelClassName="custom-input-label px-1"
           />
-          <Button btnClassName="btn btn-light" btnText="Giriş Yap" />
+          <Button btnClassName="btn btn-light" btnText="Giriş Yap" btnLink="/HomePage" />
+          
           <div className="row justify-content-between">
             <ToLink
               linkClassName="col-8 px-3"
               linkText=" Şifremi Unuttum"
-              linkTo="/ForgetPassword"
+              linkTo="/ForgotPassword"
             />
             <ToLink
               linkClassName="col-4 text-end pr-2"

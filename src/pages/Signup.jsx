@@ -24,12 +24,10 @@ function Signup() {
     const inputValue = e.target.value;
     setPassword(inputValue);
   };
-  
+
   const handlePasswordControl = (e) => {
     const inputValue = e.target.value;
     setConfirmPassword(inputValue);
-  
-    
   
     if (password && inputValue && password !== inputValue) {
       setPasswordError("Şifreler uyuşmuyor.");
@@ -65,25 +63,28 @@ function Signup() {
             placeholder="E-mail Adresinizi Giriniz"
           />
           <TextInput
-  labelFor="password"
-  labelText="Şifre"
-  inputType="password"
-  placeholder="Şifrenizi Giriniz"
-  onInputChange={handlePasswordChange}
-  inputName="password"
-/>
-<TextInput
-  labelFor="confirmPassword"
-  labelText="Şifre Tekrarı"
-  inputType="password"
-  placeholder="Şifrenizi Tekrar Giriniz"
-  onInputChange={handlePasswordControl}
-  inputName="confirmPassword"
-/>
-          {passwordError && (
-            <div className="text-danger">{passwordError}</div>
-          )}
-          <Button btnClassName="btn btn-light mt-2" btnText="Hesap Oluştur" />
+            labelFor="password"
+            labelText="Şifre"
+            inputType="password"
+            placeholder="Şifrenizi Giriniz"
+            onInputChange={handlePasswordChange}
+            inputName="password"
+          />
+          <TextInput
+            labelFor="confirmPassword"
+            labelText="Şifre Tekrarı"
+            inputType="password"
+            placeholder="Şifrenizi Tekrar Giriniz"
+            onInputChange={handlePasswordControl}
+            inputName="confirmPassword"
+          />
+          {passwordError && <div className="text-danger">{passwordError}</div>}
+          <Button
+            btnClassName="btn btn-light"
+            btnText="Hesap Oluştur"
+            btnLink="/"
+            linkClass=""
+          />
           <div className="text-end">
             <ToLink
               linkClassName="text-end pr-2"
